@@ -230,13 +230,26 @@ export function ProductModal({ open, onOpenChange, product, onSuccess }: Props) 
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="bg-[#0D0D12] border-white/10 text-white sm:max-w-[460px] max-w-[95vw] p-5 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] backdrop-blur-2xl overflow-hidden">
         <DialogHeader className="space-y-1 pb-1">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+              </div>
+              <DialogTitle className="text-base font-bold text-white tracking-tight">
+                {product ? "Editar Produto" : "Novo Produto"}
+              </DialogTitle>
             </div>
-            <DialogTitle className="text-base font-bold text-white tracking-tight">
-              {product ? "Editar Produto" : "Novo Produto"}
-            </DialogTitle>
+            {product?.status === 'ready_to_publish' && (
+              <Button 
+                type="button" 
+                disabled={loading || deleting} 
+                onClick={handlePublish}
+                className="h-7 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-medium text-[11px] border border-emerald-500/20 hover:border-emerald-500/40 transition-all cursor-pointer mr-6"
+              >
+                <CheckCircle2 className="w-3 h-3 mr-1" />
+                Publicar
+              </Button>
+            )}
           </div>
           <DialogDescription className="text-xs text-zinc-400">
             Cadastre os links de afiliados e adicione os vídeos prontos.
@@ -384,17 +397,7 @@ export function ProductModal({ open, onOpenChange, product, onSuccess }: Props) 
               >
                 Cancelar
               </Button>
-              {product?.status === 'ready_to_publish' && (
-                <Button 
-                  type="button" 
-                  disabled={loading || deleting} 
-                  onClick={handlePublish}
-                  className="h-9 px-3.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-medium text-xs border border-emerald-500/20 hover:border-emerald-500/40 transition-all cursor-pointer"
-                >
-                  <CheckCircle2 className="w-3.5 h-3.5 mr-1.5" />
-                  Publicar Produto
-                </Button>
-              )}
+
               <Button 
                 type="submit" 
                 disabled={loading || deleting} 

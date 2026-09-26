@@ -141,17 +141,17 @@ export default function KanbanPage() {
       </div>
 
       {/* Kanban Board Grid: Stacked on mobile & tablet, 3-column on desktop */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 flex-1 xl:min-h-[620px] max-w-lg xl:max-w-none mx-auto w-full">
+      <div className="flex xl:grid xl:grid-cols-3 gap-5 flex-1 xl:min-h-[620px] w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] lg:w-[calc(100%+4rem)] xl:w-full -ml-4 sm:-ml-6 lg:-ml-8 xl:ml-0 overflow-x-auto snap-x snap-mandatory pb-6 px-4 sm:px-6 lg:px-8 xl:px-1 hide-scrollbar">
         {COLUMNS.map(column => {
           const columnProducts = products.filter(p => p.status === column.id);
 
           return (
             <div 
               key={column.id} 
-              className="kanban-column-container flex flex-col xl:h-full overflow-hidden"
+              className="kanban-column-container flex flex-col h-[calc(100vh-180px)] xl:h-full w-[85vw] max-w-[480px] xl:max-w-none sm:w-[480px] xl:w-auto xl:min-w-0 snap-center shrink-0 rounded-3xl bg-white/[0.01] border border-white/[0.03] overflow-hidden"
             >
               {/* Minimalist Column Header */}
-              <div className={`px-4 py-3 flex items-center justify-between border-b bg-white/[0.01] ${column.headerBorderColor}`}>
+              <div className="px-4 py-3 flex items-center justify-between border-b border-white/[0.04] bg-white/[0.01]">
                 <div className="flex items-center gap-2.5">
                   <span className={`w-2 h-2 rounded-full ${column.dotColor} ${column.glowColor}`} />
                   <h3 className="font-medium text-zinc-200 text-xs tracking-tight">
