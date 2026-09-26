@@ -210,46 +210,17 @@ export function ProductModal({ open, onOpenChange, product, onSuccess }: Props) 
     }
   };
 
-  const handlePublish = async () => {
-    if (!product) return;
-    setLoading(true);
-    try {
-      const { error } = await supabase.from("products").update({ status: 'published' }).eq("id", product.id);
-      if (error) throw error;
-      onSuccess();
-      onOpenChange(false);
-    } catch (err) {
-      console.error("Error publishing product:", err);
-      alert("Erro ao publicar produto");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="bg-[#0D0D12] border-white/10 text-white sm:max-w-[460px] max-w-[95vw] p-5 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] backdrop-blur-2xl overflow-hidden">
         <DialogHeader className="space-y-1 pb-1">
-          <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-              </div>
-              <DialogTitle className="text-base font-bold text-white tracking-tight">
-                {product ? "Editar Produto" : "Novo Produto"}
-              </DialogTitle>
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
             </div>
-            {product?.status === 'ready_to_publish' && (
-              <Button 
-                type="button" 
-                disabled={loading || deleting} 
-                onClick={handlePublish}
-                className="h-7 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-medium text-[11px] border border-emerald-500/20 hover:border-emerald-500/40 transition-all cursor-pointer mr-6"
-              >
-                <CheckCircle2 className="w-3 h-3 mr-1" />
-                Publicar
-              </Button>
-            )}
+            <DialogTitle className="text-base font-bold text-white tracking-tight">
+              {product ? "Editar Produto" : "Novo Produto"}
+            </DialogTitle>
           </div>
           <DialogDescription className="text-xs text-zinc-400">
             Cadastre os links de afiliados e adicione os vídeos prontos.
@@ -321,7 +292,7 @@ export function ProductModal({ open, onOpenChange, product, onSuccess }: Props) 
           <div className="space-y-2.5 pt-2.5 border-t border-white/[0.08]">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <Play className="w-3.5 h-3.5 fill-indigo-400 text-indigo-400" />
+                <img src="/drive.png" alt="Drive" className="w-3.5 h-3.5 object-contain" />
                 <span className="text-xs font-semibold text-indigo-300">
                   Vídeos ({fields.length})
                 </span>
@@ -353,7 +324,7 @@ export function ProductModal({ open, onOpenChange, product, onSuccess }: Props) 
                     placeholder={`Link do Vídeo #${index + 1}`}
                     initialValue={product?.video_links?.[index]}
                     resetKey={open}
-                    icon={<Play className="w-3 h-3 fill-indigo-400 text-indigo-400" />}
+                    icon={<img src="/drive.png" alt="Drive" className="w-3.5 h-3.5 object-contain" />}
                     className="border-indigo-500/20 focus-visible:border-indigo-500"
                   />
                   <Button 
