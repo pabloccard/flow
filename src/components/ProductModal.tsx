@@ -151,11 +151,13 @@ export function ProductModal({ open, onOpenChange, product, onSuccess }: Props) 
         }
       }
 
+      const formattedName = data.name.trim() ? data.name.trim().charAt(0).toUpperCase() + data.name.trim().slice(1).toLowerCase() : data.name;
+
       if (product) {
         const { error } = await supabase
           .from("products")
           .update({
-            name: data.name,
+            name: formattedName,
             cover_image_url: data.cover_image_url || null,
             shopee_link: data.shopee_link || null,
             tiktok_link: data.tiktok_link || null,
@@ -171,7 +173,7 @@ export function ProductModal({ open, onOpenChange, product, onSuccess }: Props) 
           .insert({
             workspace_id: workspaceId,
             created_by: profile.id,
-            name: data.name,
+            name: formattedName,
             cover_image_url: data.cover_image_url || null,
             shopee_link: data.shopee_link || null,
             tiktok_link: data.tiktok_link || null,
