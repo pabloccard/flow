@@ -43,6 +43,16 @@ export interface Product {
   updated_at: string;
 }
 
+export interface Prompt {
+  id: string;
+  workspace_id: string;
+  title: string;
+  content: string;
+  created_by: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export const STATUS_LABELS: Record<ProductStatus, string> = {
   pending_video: 'Vídeo Pendente',
   ready_to_publish: 'Vídeo Pronto',

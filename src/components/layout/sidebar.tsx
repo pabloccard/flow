@@ -21,11 +21,13 @@ import {
   Menu,
   X,
   ChevronDown,
+  MessageSquareText,
 } from "lucide-react";
 import { useState } from "react";
 
 const NAV_ITEMS = [
   { href: "/", label: "Painel de Produção", icon: LayoutDashboard },
+  { href: "/prompts", label: "Prompts", icon: MessageSquareText },
   { href: "/settings", label: "Configurações", icon: Settings },
 ];
 
